@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <form action="" onsubmit="validateForm(event)">
+        <label for="username">username</label> 
+        <br>
+        <input type="text" id="username">
+        <span id="usernameError" class="error"></span>
+
+        <br>
+
+        <label for="email">Email</label> 
+        <br>
+        <input type="mail" id="email">
+        <span id="mailError" class="error"></span>
+        <br>
+        <label for="password">Password</label> 
+        <br>
+        <input type="password" id="password"> 
+        <span id="passwordError" class="error"></span>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function validateForm(event){
+            //prevent the form from submitting 
+            event.preventDefault();
+
+            //get form elements
+            const username = document.getElementById('username').value
+            const mail = document.getElementById('email').value
+            const password = document.getElementById('password').value
+
+            // yahan agayi Regex
+            const usernameRegex = /^[a-zA-Z0-9]{3,20}$/
+            const mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            const passwordRegex = /^.{6,}$/
+
+            //validation
+            const usernameIsValid = usernameRegex.test(username)
+            const mailIsValid = mailRegex.test(mail)
+            const passwordIsValid = passwordRegex.test(password)
+
+            //display valdation error
+            document.getElementById('usernameError').textContent = usernameIsValid ? '' : 'Invalid Username'
+            document.getElementById('mailError').textContent = mailIsValid ? '' : 'Invalid Email'
+            document.getElementById('passwordError').textContent = passwordIsValid ? '' : 'Password must be 6 character long'
+
+            if(usernameIsValid && mailIsValid && passwordIsValid){
+                alert("Form submitted succefully")
+            }
+        }
+    </script>
+</body>
+</html>
